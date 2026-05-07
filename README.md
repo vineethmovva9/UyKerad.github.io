@@ -356,6 +356,7 @@ def eval_model(name, model):
     print("Confusion matrix:\n", confusion_matrix(y_test, pred))
 for name, model in models.items():
     eval_model(name, model)
+```
 ## 6. Visualizations
 
 ## 7. Conclusions
