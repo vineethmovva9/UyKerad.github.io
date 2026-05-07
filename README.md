@@ -22,8 +22,6 @@ import seaborn as sns
 from scipy.stats import ttest_ind
 import scipy
 import re
-import warnings
-warnings.filterwarnings('ignore')
 
 # Load the dataset
 df = pd.read_csv("atp_tennis.csv")
@@ -33,7 +31,7 @@ print(f"\nColumn names and types:")
 print(df.dtypes)
 df.head()
 ```
-
+<img width="1620" height="610" alt="1a8ec84696514979862863151a5898e1" src="https://github.com/user-attachments/assets/6d8c4871-b944-4fc6-a472-680dfd1a99f5" />
 ## 4. Exploratory Data Analysis
 
 ## 5. Primary Analysis
