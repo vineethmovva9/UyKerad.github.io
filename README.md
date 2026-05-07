@@ -11,7 +11,7 @@
 **D (ML Algorithm Design/Development).**  
     - Feature Engineering and the new columns generated was done by Darek Yu.  
 **E (ML Algorithm Training and Test Data Analysis).**    
-    - Model training, testing, and performance evaluation (Logistic Regression, Random Forest, Gradient Boosting) was done by Vineeth Mova.
+    - Model training, testing, and performance evaluation (Logistic Regression, Random Forest, Gradient Boosting) was done by Vineeth Movva.
 **F (Visualization, Result Analysis, Conclusion).**  
 **G (Final Tutorial Report Creation).**  
 
