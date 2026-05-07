@@ -5,7 +5,7 @@
 A (Project idea).  
 B (Dataset Curation and Preprocessing).  
 C (Data Exploration and Summary Statistics).  
-    - First Data Exploration on Court Surface v.s. Upset Rate was done by Darek Yu. 
+    - First Data Exploration on Court Surface v.s. Upset Rate was done by Darek Yu.  
 D (ML Algorithm Design/Development).  
     - Feature Engineering and the new columns generated was done by Darek Yu.
 E (ML Algorithm Training and Test Data Analysis).  
