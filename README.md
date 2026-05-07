@@ -1,5 +1,5 @@
 # Predicting Upsets in Professional Tennis Matches
-### Spring 2026 Data Science Project | Contributors: Alexander Cui, Alex Luo, Dhruv Das, Vincent DePasquale, Darek Yu, Vineeth Mova
+### Spring 2026 Data Science Project | Contributors: Alexander Cui, Alex Luo, Dhruv Das, Vincent DePasquale, Darek Yu, Vineeth Movva
 
 ## 1. Contributions
 **A (Project idea).**  
