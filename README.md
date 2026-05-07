@@ -190,8 +190,67 @@ plt.show()
 <img width="1219" height="624" alt="ace5dbc099069447e55685d49b2e0277" src="https://github.com/user-attachments/assets/2e19a3a8-e913-46df-b8db-e0b584a974ae" />
 
 ## 5. Primary Analysis
+### 5.1 Motivation
+Our exploratory data analysis confirmed that variables linked the tournament context all correlate with upset probability. We now build a binary classification model to predict whether a given match will be an upset (1) or not (0).
+We will compare three models:
+1. Logistic Regression
+2. Random Forest
+3. Gradient Boosting
+   
+### 5.2 Feature Engineering
+We will engineer the following features:
+1. log_rank_diff - Log of absolute ranking gap between players; A higher value means more one-sided on paper
+2. log_favored_rank - Log of the higher ranked player's rank; Captures the quality of the favorite
+3. implied_prob_fav - Normalized implied probability from betting odds
+4. round_num - Encoded tournament round (1st Round -> Final)
+5. series_tier - Tournament prestige tier (International -> Grand Slam)
+6. Best_of - Match format (3 or 5 sets)
+7. Surface - One-hot encoded court surface
 
+```
+# Work with rows that have valid odds
+odds_valid = valid[(valid['Odd_1'] > 0) & (valid['Odd_2'] > 0)].copy()
+print(f"Matches with valid betting odds: {len(odds_valid):,}")
+
+# Rank features
+odds_valid['rank_diff'] = abs(odds_valid['Rank_1'] - odds_valid['Rank_2'])
+odds_valid['log_rank_diff'] = np.log1p(odds_valid['rank_diff'])
+odds_valid['favored_rank'] = odds_valid[['Rank_1', 'Rank_2']].min(axis=1)
+odds_valid['log_favored_rank'] = np.log1p(odds_valid['favored_rank'])
+
+# Betting implied probability for the favorite (normalized to remove overround)
+raw_fav  = odds_valid.apply(lambda r: 1/r['Odd_1'] if r['p1_favored'] else 1/r['Odd_2'], axis=1)
+raw_dog  = odds_valid.apply(lambda r: 1/r['Odd_2'] if r['p1_favored'] else 1/r['Odd_1'], axis=1)
+overround = raw_fav + raw_dog
+odds_valid['implied_prob_fav'] = raw_fav / overround
+
+# Encode round as ordinal
+round_order = {'1st Round': 1, '2nd Round': 2, '3rd Round': 3, '4th Round': 4,
+               'Round Robin': 3, 'Quarterfinals': 5, 'Semifinals': 6, 'The Final': 7}
+odds_valid['round_num'] = odds_valid['Round'].map(round_order).fillna(3).astype(int)
+
+# Encode tournament tier
+series_order = {'International': 1, 'International Gold': 2, 'ATP250': 2,
+                'ATP500': 3, 'Masters': 4, 'Masters 1000': 4,
+                'Masters Cup': 5, 'Grand Slam': 5}
+odds_valid['series_tier'] = odds_valid['Series'].map(series_order).fillna(2).astype(int)
+
+feature_cols = ['log_rank_diff', 'log_favored_rank', 'implied_prob_fav',
+                'round_num', 'series_tier', 'Best of', 'Surface']
+
+X = pd.get_dummies(odds_valid[feature_cols], columns=['Surface'])
+y = odds_valid['upset']
+
+print(f"\nFeature matrix shape: {X.shape}")
+print(f"Features: {X.columns.tolist()}")
+```
+
+> Matches with valid betting odds: 62,090
+> Feature matrix shape: (62090, 10)
+> Features: ['log_rank_diff', 'log_favored_rank', 'implied_prob_fav', 'round_num', 'series_tier', 'Best of', 'Surface_Carpet', 'Surface_Clay', 'Surface_Grass', 'Surface_Hard']
+
+### 5.3 Model Training
 ## 6. Visualizations
 
-## Conclusions
+## 7. Conclusions
 
