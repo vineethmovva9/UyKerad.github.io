@@ -199,14 +199,14 @@ We will compare three models:
    
 ### 5.2 Feature Engineering
 We will engineer the following features:
-1. log_rank_diff - Log of absolute ranking gap between players; A higher value means more one-sided on paper
-2. log_favored_rank - Log of the higher ranked player's rank; Captures the quality of the favorite
-3. implied_prob_fav - Normalized implied probability from betting odds
-4. round_num - Encoded tournament round (1st Round -> Final)
-5. series_tier - Tournament prestige tier (International -> Grand Slam)
-6. Best_of - Match format (3 or 5 sets)
-7. Surface - One-hot encoded court surface
-
+1. **log_rank_diff** - Log of absolute ranking gap between players; A higher value means more one-sided on paper
+2. **log_favored_rank** - Log of the higher ranked player's rank; Captures the quality of the favorite
+3. **implied_prob_fav** - Normalized implied probability from betting odds
+4. **round_num**- Encoded tournament round (1st Round -> Final)
+5. **series_tier** - Tournament prestige tier (International -> Grand Slam)
+6. **Best_of** - Match format (3 or 5 sets)
+7. **Surface** - One-hot encoded court surface
+   
 ```
 # Work with rows that have valid odds
 odds_valid = valid[(valid['Odd_1'] > 0) & (valid['Odd_2'] > 0)].copy()
@@ -244,10 +244,11 @@ y = odds_valid['upset']
 print(f"\nFeature matrix shape: {X.shape}")
 print(f"Features: {X.columns.tolist()}")
 ```
-
-> Matches with valid betting odds: 62,090
-> Feature matrix shape: (62090, 10)
-> Features: ['log_rank_diff', 'log_favored_rank', 'implied_prob_fav', 'round_num', 'series_tier', 'Best of', 'Surface_Carpet', 'Surface_Clay', 'Surface_Grass', 'Surface_Hard']
+```
+Matches with valid betting odds: 62,090
+Feature matrix shape: (62090, 10)
+Features: ['log_rank_diff', 'log_favored_rank', 'implied_prob_fav', 'round_num', 'series_tier', 'Best of', 'Surface_Carpet', 'Surface_Clay', 'Surface_Grass', 'Surface_Hard']
+```
 
 ### 5.3 Model Training
 ## 6. Visualizations
