@@ -31,7 +31,34 @@ print(f"\nColumn names and types:")
 print(df.dtypes)
 df.head()
 ```
-<img width="1620" height="610" alt="1a8ec84696514979862863151a5898e1" src="https://github.com/user-attachments/assets/6d8c4871-b944-4fc6-a472-680dfd1a99f5" />
+```
+Dataset shape: (65884, 17)
+Tournament     object
+Date           object
+Series         object
+Court          object
+Surface        object
+Round          object
+Best of         int64
+Player_1       object
+Player_2       object
+Winner         object
+Rank_1          int64
+Rank_2          int64
+Pts_1           int64
+Pts_2           int64
+Odd_1         float64
+Odd_2         float64
+Score          object
+dtype: object
+|index|Tournament|Date|Series|Court|Surface|Round|Best of|Player\_1|Player\_2|Winner|Rank\_1|Rank\_2|Pts\_1|Pts\_2|Odd\_1|Odd\_2|Score|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|0|Australian Hardcourt Championships|2000-01-03|International|Outdoor|Hard|1st Round|3|Dosedel S\.|Ljubicic I\.|Dosedel S\.|63|77|-1|-1|-1\.0|-1\.0|6-4 6-2|
+|1|Australian Hardcourt Championships|2000-01-03|International|Outdoor|Hard|1st Round|3|Clement A\.|Enqvist T\.|Enqvist T\.|56|5|-1|-1|-1\.0|-1\.0|3-6 3-6|
+|2|Australian Hardcourt Championships|2000-01-03|International|Outdoor|Hard|1st Round|3|Escude N\.|Baccanello P\.|Escude N\.|40|655|-1|-1|-1\.0|-1\.0|6-7 7-5 6-3|
+|3|Australian Hardcourt Championships|2000-01-03|International|Outdoor|Hard|1st Round|3|Knippschild J\.|Federer R\.|Federer R\.|87|65|-1|-1|-1\.0|-1\.0|1-6 4-6|
+|4|Australian Hardcourt Championships|2000-01-03|International|Outdoor|Hard|1st Round|3|Fromberg R\.|Woodbridge T\.|Fromberg R\.|81|198|-1|-1|-1\.0|-1\.0|7-6 5-7 6-4|
+```
 
 ```
 PREPROCESSING GOES HERE
