@@ -32,7 +32,45 @@ print(df.dtypes)
 df.head()
 ```
 <img width="1620" height="610" alt="1a8ec84696514979862863151a5898e1" src="https://github.com/user-attachments/assets/6d8c4871-b944-4fc6-a472-680dfd1a99f5" />
+
+```
+PREPROCESSING GOES HERE
+```
 ## 4. Exploratory Data Analysis
+### 4.1 Does Court Surface Affect Upset Rate? (Chi-Squared Test)
+```
+contingency = pd.crosstab(valid["Surface"], valid["upset"])
+
+chi2, p, dof, expected = scipy.stats.chi2_contingency(contingency)
+
+print(f"Chi-squared statistic: {chi2:.4f}")
+print(f"p-value:               {p:.6f}")
+print(f"Degrees of freedom:    {dof}")
+
+# Plot upset rate by surface
+upset_rate = valid.groupby("Surface")["upset"].mean().reset_index()
+upset_rate = upset_rate.sort_values("upset", ascending=False)
+
+fig, ax = plt.subplots(figsize=(8, 5))
+colors = sns.color_palette("coolwarm", len(upset_rate))
+bars = ax.bar(upset_rate["Surface"], upset_rate["upset"], color=colors, edgecolor='black', linewidth=0.7)
+
+ax.set_title("Upset Rate by Court Surface", fontsize=14, fontweight='bold')
+ax.set_ylabel("Proportion of Upsets")
+ax.set_xlabel("Surface")
+ax.set_ylim(0, 0.45)
+ax.axhline(valid['upset'].mean(), color='gray', linestyle='--', label=f'Overall mean ({valid["upset"].mean():.3f})')
+ax.legend()
+
+for bar, val in zip(bars, upset_rate["upset"]):
+    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.005, f"{val:.3f}",
+            ha='center', va='bottom', fontsize=10)
+
+plt.tight_layout()
+plt.savefig("upset_by_surface.png", dpi=150)
+plt.show()
+```
+<img width="888" height="544" alt="82266bcd76e1bd9d3584bc0338300c95" src="https://github.com/user-attachments/assets/f1324fc6-9dda-40dc-88bc-557b2c8b6110" />
 
 ## 5. Primary Analysis
 
